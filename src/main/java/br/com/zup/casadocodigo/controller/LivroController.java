@@ -31,14 +31,10 @@ public class LivroController {
 	@PostMapping(value = "/livros")
 	@Transactional
 	public ResponseEntity<Livro>criaLivro(@RequestBody @Valid LivroDTO livroDto){
-		try {
 			Livro livro = livroDto.toModel(manager);
 			repository.save(livro);
 			return ResponseEntity.status(HttpStatus.OK).body(livro);
 
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
 	}
 
 
@@ -47,7 +43,5 @@ public class LivroController {
 	public ResponseEntity<List<Livro>>buscaLivro(){ 
 		List<Livro> list = repository.findAll(); 
 		return ResponseEntity.ok().body(list); }
-
-
 
 }
